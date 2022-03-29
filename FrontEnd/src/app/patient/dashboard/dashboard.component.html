@@ -1,0 +1,97 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Dashboard</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/patient/dashboard">
+                <i class="fas fa-home"></i>Accueil</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Widgets -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="body">
+            <div class="row align-items-center">
+              <div class="col-md-4">
+                <img src="assets/images/ges_cab.png" alt="" class="w-100">
+              </div>
+              <div class="col-md-8">
+                <h4 class="font-20 weight-500 mb-2">
+                  Bienvenu ! <div class="weight-600 font-30 col-blue pt-1">{{profile?.nom}} {{profile?.prenom}}</div>
+                </h4>
+                <p class="font-18 max-width-600">
+                  Nous profitons de l'occasion pour vous souhaiter la bienvenue sur notre plateforme et vous remercier d'avoir choisi nos médecins pour participer à vos soins de santé. Nous sommes impatients de vous offrir des soins de santé complets et personnalisés axés sur le bien-être et la prévention.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><h5>Mes rendez-vous d'aujourd'hui</h5>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tabbable-line">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="body">
+                  <div class="table-responsive mat-elevation-z8">
+                    <mat-table [dataSource]="myTodayRDV" matSort class="mat-cell">
+                      <ng-container matColumnDef="nom">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Nom de médecin</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.medecin.nom}} {{row.medecin.prenom}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="email">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.medecin.email}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="telephone">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Téléphone</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.medecin.telephone}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="rdvDate">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Date et Heure</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.rdvDate | date: 'dd/MM/yyyy' }}, {{row.rdvHeure}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="isValid">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Accepter</mat-header-cell>
+                        <ng-container *matCellDef="let row">
+                          <mat-cell *ngIf="row.isValid===false" class="col-red">Non</mat-cell>
+                          <mat-cell *ngIf="row.isValid===true" class="col-green">Oui</mat-cell>
+                          <mat-cell *ngIf="row.isValid===null" class="col-red">En attente</mat-cell>
+                        </ng-container>
+                      </ng-container>
+                      <ng-container matColumnDef="adresse">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Adresse</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.medecin.adresse}}</mat-cell>
+                      </ng-container>
+                      
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;">
+                      </mat-row>
+                    </mat-table>
+                    <div *ngIf="myTodayRDV.data.length === 0" class="no-results text-center mb-3 mt-3">
+                      Vous n'avez pas encore de rendez-vous !
+                    </div>
+                    <mat-paginator #paginator [pageIndex]="0" [pageSize]="10"
+                      [pageSizeOptions]="[2, 5, 10, 25, 50]">
+                    </mat-paginator>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

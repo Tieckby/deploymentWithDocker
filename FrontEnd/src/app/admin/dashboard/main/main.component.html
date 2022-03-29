@@ -1,0 +1,179 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Accueil</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i>Accueil</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Widgets -->
+    <div class="row">
+      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="card card-statistic-2">
+          <div class="clearfix">
+            <div class="card-icon shadow-primary bg-blue">
+              <i class="material-icons align-middle">assignment</i>
+            </div>
+            <div class="card-right">
+              <div>
+                <h5 class="float-end">Rendez-vous</h5>
+              </div>
+              <div class="m-r-10 m-l-10">
+                <h3 class="font-weight-bold float-end mb-0">{{nombreRDV}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-chart">
+            <canvas baseChart [chartType]="'line'" [datasets]="cardChartRDVData" [labels]="cardChartRDVLabel"
+              [options]="cardChartRDV" [legend]="true">
+            </canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="card card-statistic-2">
+          <div class="clearfix">
+            <div class="card-icon shadow-primary bg-blue">
+              <span class="material-icons-outlined align-middle">people</span>
+            </div>
+            <div class="card-right">
+              <div>
+                <h5 class="float-end">Les Patients</h5>
+              </div>
+              <div class="m-r-10 m-l-10">
+                <h3 class="font-weight-bold float-end mb-0">{{nombrePatients}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-chart">
+            <canvas baseChart [chartType]="'line'" [datasets]="cardChartPatientData" [labels]="cardChartPatientLabel"
+              [options]="cardChartPatient" [legend]="true">
+            </canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="card card-statistic-2">
+          <div class="clearfix">
+            <div class="card-icon shadow-primary bg-blue">
+              <span class="material-icons-outlined align-middle">people</span>
+            </div>
+            <div class="card-right">
+              <div>
+                <h5 class="float-end">Les Médecins</h5>
+              </div>
+              <div class="m-r-10 m-l-10">
+                <h3 class="font-weight-bold float-end mb-0">{{nombreMedecins}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-chart">
+            <canvas baseChart [chartType]="'line'" [datasets]="cardChartMedecinData" [labels]="cardChartMedecinLabel"
+              [options]="cardChartMedecin" [legend]="true">
+            </canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="card card-statistic-2">
+          <div class="clearfix">
+            <div class="card-icon shadow-primary bg-blue">
+              <span class="material-icons-outlined align-middle">supervisor_account</span>
+            </div>
+            <div class="card-right">
+              <div>
+                <h5 class="float-end">Les admins</h5>
+              </div>
+              <div class="m-r-10 m-l-10">
+                <h3 class="font-weight-bold float-end mb-0">{{nombreAdmins}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-chart">
+            <canvas baseChart [chartType]="'line'" [datasets]="cardChartAdminData" [labels]="cardChartAdminLabel"
+              [options]="cardChartAdmin" [legend]="true">
+            </canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>
+              Registre des Rendez-vous</h2>
+          </div>
+          <div class="tableBody">
+            <div class="table-responsive">
+              <table class="table table-hover ">
+                <thead>
+                  <tr>
+                    <th>Nom patient</th>
+                    <th>Médecin assigné</th>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Symptôme</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of allRDV">
+                    <td>{{item.patient.nom}} {{item.patient.prenom}}</td>
+                    <td>{{item.medecin.nom}} {{item.medecin.prenom}}</td>
+                    <td>{{item.rdvDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{item.rdvHeure}}</td>
+                    <td>{{item.symptom}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>Liste des médecins</h2>
+          </div>
+          <div class="tableBody">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Nom complet</th>
+                    <th>Email</th>
+                    <th>Spécialité</th>
+                    <th>Statut</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of listMedecins">
+                    <td>{{item.nom}} {{item.prenom}}</td>
+                    <td><a href="mailto:{{item.email}}">{{item.email}}</a></td>
+                    <td>{{item.specialite.nom}}</td>
+                    <td *ngIf="item.etat==='ACTIVER'">
+                      <div class="badge col-green">{{item.etat}}</div>
+                    </td>
+                    <td *ngIf="item.etat==='DESACTIVER'">
+                      <div class="badge col-red">{{item.etat}}</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

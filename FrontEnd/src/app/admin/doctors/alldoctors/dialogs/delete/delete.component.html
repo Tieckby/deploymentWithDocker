@@ -1,0 +1,21 @@
+<div class="container">
+  <h5 mat-dialog-title>Êtes-vous sûr de supprimer ?</h5>
+  <div mat-dialog-content>
+    <ul class="clearfix">
+      <li>
+        <p><span class="font-weight-bold">Nom : </span><strong>{{data.nom}} {{data.prenom}}</strong></p>
+      </li>
+      <li>
+        <p>
+          <span class="font-weight-bold">Tél : </span>{{data.telephone}}
+        </p>
+      </li>
+    </ul>
+  </div>
+  <div mat-dialog-actions class="mb-1">
+    <button mat-flat-button color="warn" [class.auth-spinner]="loading" (click)="confirmDelete()">
+      Supprimer
+    </button>
+    <button mat-flat-button (click)="onNoClick()" tabindex="-1">Annuler</button>
+  </div>
+</div>

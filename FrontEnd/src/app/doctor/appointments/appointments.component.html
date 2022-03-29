@@ -1,0 +1,124 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Tous les rendez-vous</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/doctor/dashboard">
+                <i class="fas fa-home"></i>Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Rendez-vous</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tabbable-line">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="body">
+                  <div class="table-responsive">
+                    <div class="materialTableHeader">
+                      <div class="row">
+                        <div class="col-8">
+                          <ul class="header-buttons-left ms-0">
+                            <li class="dropdown">
+                              <h2>
+                                <strong>Rendez-vous</strong></h2>
+                            </li>
+                            <li class="dropdown m-l-20">
+                              <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                              <input placeholder="Recherche" (keyup)="applyFilter($event.target.value)" type="text" class="browser-default search-field"
+                                aria-label="Search box">
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-table #table [dataSource]="myAllRDV" matSort class="mat-cell">
+                      <ng-container matColumnDef="nom">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Nom Patient</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.patient.nom}} {{row.patient.prenom}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="dateTime">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Date et Heure
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          {{row.rdvDate | date: 'dd/MM/yyyy'}}, {{row.rdvHeure}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="telephone">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Téléphone
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.patient.telephone}}
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="email">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.patient.email}}</mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="genre">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Genre
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.patient.genre}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="symptom">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Symptôme</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.symptom}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="isValid">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Accepter</mat-header-cell>
+                        <ng-container *matCellDef="let row">
+                          <mat-cell *ngIf="row.isValid===null" class="col-red">En attente</mat-cell>
+                          <mat-cell *ngIf="row.isValid===false" class="col-red">Non</mat-cell>
+                          <mat-cell *ngIf="row.isValid===true" class="col-green">Oui</mat-cell>
+                        </ng-container>
+                      </ng-container>
+                      <!-- actions -->
+                      <ng-container matColumnDef="actions">
+                        <mat-header-cell class="tbl-col-width-per-10" *matHeaderCellDef>Actions</mat-header-cell>
+                        <mat-cell *matCellDef="let row;" class="tbl-col-width-per-10">
+                          <button mat-icon-button (click)="detailsCall(row)" style="color: #40ea48;">
+                            <i class="material-icons">visibility</i>
+                          </button>
+                          <button mat-icon-button style="color: #3F51B5;" [matMenuTriggerFor]="menu">
+                            <mat-icon>more_vert</mat-icon>
+                          </button>
+                          <mat-menu #menu="matMenu">
+                            <button mat-menu-item style="color: #40ea48;" (click)="validRDV(row)">
+                              <i class="material-icons-two-tone align-middle msr-2">done</i>
+                              <span>Valider</span>
+                            </button>
+                            <button mat-menu-item style="color: #ee2525;" (click)="cancel(row)">
+                              <i class="material-icons align-middle msr-2">cancel</i>
+                              <span>Annuler</span>
+                            </button>
+                          </mat-menu>
+                        </mat-cell>
+                      </ng-container>
+
+                      <mat-header-row *matHeaderRowDef="displayedColumns">
+                      </mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;">
+                      </mat-row>
+                    </mat-table>
+                    <div *ngIf="myAllRDV.data.length === 0" class="no-results text-center mt-3">
+                      Vous n'avez pas encore de rendez-vous !
+                    </div>
+                    <mat-paginator #paginator [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

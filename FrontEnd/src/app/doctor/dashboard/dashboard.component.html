@@ -1,0 +1,125 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Dashboard</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/doctor/dashboard">
+                <i class="fas fa-home"></i>Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Médecin Dashboard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Widgets -->
+    <div class="row">
+      <div class="col-lg-3 col-sm-6">
+        <div class="info-box7 l-bg-card1 order-info-box7">
+          <div class="info-box7-block">
+            <h5 class="m-b-15">Patients du jour</h5>
+            <h2 class="text-end"><i class="fas fa-user-injured float-start"></i><span>{{myTodayPatient?.length}}</span></h2>
+            <p class="m-b-0">Mes patients d'aujourd'hui</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="info-box7 l-bg-card2 order-info-box7">
+          <div class="info-box7-block">
+            <h5 class="m-b-15">Rendez-vous du jour</h5>
+            <h2 class="text-end"><i class="far fa-calendar-check float-start"></i><span>{{myTodayRDV.data.length}}</span></h2>
+            <p class="m-b-0">Mes rendez-vous d'aujourd'hui</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="info-box7 l-bg-card3 order-info-box7">
+          <div class="info-box7-block">
+            <h5 class="m-b-15">Tous mes patients</h5>
+            <h2 class="text-end"><i class="fa fa-users float-start" aria-hidden="true"></i><span>{{myAllPatient?.length}}</span></h2>
+            <p class="m-b-0">Le total de mes patients</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="info-box7 l-bg-card4 order-info-box7">
+          <div class="info-box7-block">
+            <h5 class="m-b-15">Tous mes rendez-vous</h5>
+            <h2 class="text-end"><i class="far fa-calendar-check float-start"></i><span>{{myAllRDV?.length}}</span></h2>
+            <p class="m-b-0">Le total de mes rendez-vous</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #END# Widgets -->
+    <h5>La liste des rendez-vous d'aujourd'hui</h5>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tabbable-line">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="body">
+                  <div class="table-responsive mat-elevation-z8">
+                    <mat-table [dataSource]="myTodayRDV" matSort class="mat-cell">
+                      <ng-container matColumnDef="nom">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Nom patient</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.patient.nom}} {{row.patient.prenom}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="email">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Email patient</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.patient.email}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="genre">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Genre</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.patient.genre}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="rdvDate">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.rdvDate | date: 'dd/MM/yyyy' }}
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="rdvHeure">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Heure</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.rdvHeure}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="telephone">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Tél Patient</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.patient.telephone}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="symptom">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Symptôme</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.symptom}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="isValid">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Accepter</mat-header-cell>
+                        <ng-container *matCellDef="let row">
+                          <mat-cell *ngIf="row.isValid===null" class="col-red">En attente</mat-cell>
+                          <mat-cell *ngIf="row.isValid===false" class="col-red">Non</mat-cell>
+                          <mat-cell *ngIf="row.isValid===true" class="col-green">Oui</mat-cell>
+                        </ng-container>
+                      </ng-container>
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;">
+                      </mat-row>
+                    </mat-table>
+                    <div *ngIf="myTodayRDV.data.length === 0" class="no-results text-center mb-3 mt-3">
+                      Vous n'avez pas encore de rendez-vous !
+                    </div>
+                    <mat-paginator #paginator [pageIndex]="0" [pageSize]="10"
+                      [pageSizeOptions]="[5, 10, 25, 100]">
+                    </mat-paginator>              
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,171 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 msl-3 font-17">
+            {{dialogTitle}}</div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="medecinForm" (ngSubmit)="submit">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Nom</mat-label>
+            <input matInput formControlName="nom" minlength="3" maxlength="50" required>
+            <mat-icon matSuffix>face</mat-icon>
+            <mat-error *ngIf="medecinForm.get('nom').hasError('required')">
+              Le nom est obligatoire
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Prénom</mat-label>
+            <input matInput formControlName="prenom" minlength="3" maxlength="50" required>
+            <mat-icon matSuffix>face</mat-icon>
+            <mat-error *ngIf="medecinForm.get('prenom').hasError('required')">
+              Le prénom est obligatoire
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3">
+            <mat-label>Genre</mat-label>
+            <mat-select formControlName="genre" required>
+              <mat-option value="Homme">
+                Homme
+              </mat-option>
+              <mat-option value="Femme">
+                Femme
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="medecinForm.get('genre').hasError('required')">
+              Champ obligatoire, choissez un genre
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Adresse</mat-label>
+            <input matInput formControlName="adresse" required minlength="4" maxlength="50">
+            <mat-icon matSuffix>book</mat-icon>
+            <mat-error *ngIf="medecinForm.get('adresse').hasError('required')">
+              Ce champ est obligatoire
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Téléphone</mat-label>
+            <input matInput formControlName="telephone" type="text" required>
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error *ngIf="medecinForm.get('telephone').hasError('required')">
+              Champ obligatoire, veuilez donner le bon numéro de téléphone
+            </mat-error>
+            <mat-error *ngIf="medecinForm.get('telephone').hasError('pattern')">
+              Veuillez entrer que des chiffres !
+            </mat-error>
+            <mat-error *ngIf="medecinForm.get('telephone').hasError('minlength')">
+              Votre numéro doit être au minimum de 8 chiffres !
+            </mat-error>
+            <mat-error *ngIf="medecinForm.get('telephone').hasError('maxlength')">
+              Votre numéro ne doit pas dépasser 13 chiffres !
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Rive</mat-label>
+            <mat-select (ngModelChange)="onChangeRiveValue($event)" formControlName="rive" required>
+              <mat-option *ngFor="let item of allRive" [value]="item.idRive">
+                {{item.nomRive}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="medecinForm.get('rive').hasError('required')">
+              Veuillez entrez votre rive
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Cabinet Médicale</mat-label>
+            <mat-select (ngModelChange)="onChangeCabinetValue($event)" formControlName="cabinetMedicale" required>
+              <mat-option *ngFor="let item of allCabinetMedicales" [value]="item.idCabinet">
+                {{item.nom}} | {{item.adresse}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="medecinForm.get('cabinetMedicale').hasError('required')">
+              Veuillez selectionner un cabinet médicale
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Spécialité</mat-label>
+            <mat-select formControlName="specialite" required>
+              <mat-option *ngFor="let item of allSpecialities" [value]="item.idSpecialite">
+                {{item.nom}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="medecinForm.get('specialite').hasError('required')">
+              Selectionner une spécialité !
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Nom d'utlisateur</mat-label>
+            <input matInput formControlName="username" type="text" required minlength="3" maxlength="20">
+            <mat-icon matSuffix>face</mat-icon>
+            <mat-error *ngIf="medecinForm.get('username').hasError('required')">
+              Ce champ est obligatoire
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required>
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="medecinForm.get('email').hasError('required') || medecinForm.get('email').touched">
+              Entrer votre email valide !
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" *ngIf="action!=='edit'">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput formControlName="password" minlength="6" maxlength="20" type="text">
+            <mat-icon matSuffix>key</mat-icon>
+            <mat-error *ngIf="medecinForm.get('password').hasError('required')">
+              Ce champ est obligatoire
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [class.auth-spinner]="loading" [type]="submit" [disabled]="!medecinForm.valid" (click)="confirmAdd()">Enregistrer</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Annuler</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

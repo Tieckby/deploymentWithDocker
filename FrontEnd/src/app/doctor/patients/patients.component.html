@@ -1,0 +1,40 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Patients</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/doctor/dashboard">
+                <i class="fas fa-home"></i>Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Patients</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngIf="myAllPatient?.length === 0" class="text-center"><h6>Vous n'avez pas encore de patients !</h6></div>
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" *ngFor="let item of myAllPatient">
+        <div class="card py-3 py-md-3">
+          <div class=" d-flex justify-content-between px-3 px-md-4">
+            <img src="{{userProfileImg}}{{item.username}}" height="55px" width="55px" alt="" class="rounded-circle">
+            <div class="">
+              <h6 class="col-green">{{item.nom}} {{item.prenom}}</h6>
+              <p>Profession : {{item.profession}}</p>
+            </div>
+          </div>
+          <hr class="light-hr">
+          <div class="d-flex flex-column justify-content-start w-100 px-3 px-md-4">
+            <div><i class="fas fa-map-marker-alt pt-3 psr-3"></i>{{item.adresse}}</div>
+            <div><i class="fas fa-phone pt-3 psr-3"></i>{{item.telephone}}</div>
+            <div><i class="fas fa-envelope pt-3 psr-3"></i>{{item.email}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

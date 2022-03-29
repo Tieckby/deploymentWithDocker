@@ -1,0 +1,77 @@
+<!-- <style>
+  .badge {
+        display: inline-block;
+        /* width: px; /
+         min-width: .1rem; / rem unit / /
+        / //padding: 2rem 3rem; / rem unit */ 
+        border-radius: 50%;
+        text-align: center;
+        text-decoration: white;
+        background: #bf1f1f;
+        color: #fefefe;
+        position:absolute;
+        right:-8px;
+        top:0px;
+    }
+</style> -->
+<nav #navbar class="navbar active">
+  <div class="container-fluid">
+    <div class="navbar-header" style="background-color: #99b9ec;">
+      <a href="#" onClick="return false;" class="navbar-toggle collapsed"
+        (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-expanded="false"></a>
+      <a href="#" onClick="return false;" class="bars" (click)="mobileMenuSidebarOpen($event,'overlay-open')"></a>
+      <a class="navbar-brand" routerLink={{homePage}}>
+        <img src="assets/images/ges_cab.png" class="rounded-circle" width="38" height="38" alt="Logo">
+        <span class="logo-name">GesCabinet</span>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
+      <ul class="float-start collapse-menu-icon">
+        <li>
+          <button mat-icon-button (click)="callSidemenuCollapse()" class="sidemenu-collapse">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <!-- notification -->
+        <!-- <li class="fullscreen">
+          <button mat-icon-button >
+            <mat-icon>message</mat-icon><span class="badge">{{cpteDemande}}</span>
+          </button>
+        </li> -->
+        <!-- Full Screen Button -->
+        <li class="fullscreen">
+          <button mat-icon-button (click)="callFullscreen()" class=" nav-notification-icons">
+            <mat-icon>fullscreen</mat-icon>
+          </button>
+        </li>
+        <li class="nav-item user_profile" style="padding: 0px 25px 0px 0px;" ngbDropdown>
+          <a href="#" onClick="return false;" ngbDropdownToggle role="button" class="nav-notification-icons pt-0">
+            <img src="assets/images/ges_cab.png" class="rounded-circle" width="32" height="32" alt="User">
+          </a>
+          <div ngbDropdownMenu class="notification-dropdown pullDown">
+            <div class="noti-list" style="position: relative; max-width: 600px; max-height: 300px;" [perfectScrollbar]>
+              <ul class="menu">
+                <li class="body">
+                  <ul class="user_dw_menu">
+                    <li>
+                      <a href="#" onClick="return false;">
+                        <mat-icon aria-hidden="false" class="msr-2">person</mat-icon>Profile
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0);" (click)="logout()">
+                        <mat-icon aria-hidden="false" class="msr-2">power_settings_new</mat-icon>Déconnexion
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

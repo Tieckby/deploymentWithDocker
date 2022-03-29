@@ -1,0 +1,34 @@
+.logo, .auth-signup-text{
+    display: flex ; 
+    align-items: center; 
+    justify-content: center;
+    img{
+        margin-top: -15%;
+    }
+}
+.textRight{
+    display: flex ; 
+    align-items: right; 
+    justify-content: right;
+}
+.auth-form-btn, .sign-up-button{
+    border-radius: 25px !important;
+}
+.sign-up-button{
+    background-color: #40ea48;
+    color: white;
+}
+
+.card
+{
+  margin-bottom: 10px;
+    box-shadow: 5px 5px 5px #c4c9c4;
+    border-radius: 10%;
+    padding: 20px;
+
+
+}
+
+
+
+

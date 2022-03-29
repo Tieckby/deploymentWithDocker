@@ -1,0 +1,47 @@
+<div class="addContainer">
+  <div *ngIf="isDetails" class="contact-details">
+    <div class="modalHeader">
+      <div class="editRowModal">
+        <div class="modalHeader clearfix">
+          <div class="modal-about contact-header">
+            <div class="contact-details-heading">
+              <div class="contact-details-name mb-2">{{rdv.patient.prenom}} {{rdv.patient.nom}}</div>
+              <div class="badge col-green">Patient</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div mat-dialog-content>
+      <mat-card-content>
+        <div class="contact-details-field" matTooltip="Date et l'heure du rendez-vous" [matTooltipPosition]="'above'">
+          <i class="material-icons-two-tone color-icon">event_note</i>
+          <div class="contact-detail-info"> {{rdv.rdvDate | date: 'd MMMM, yyyy'}} à {{rdv.rdvHeure}}</div>
+        </div>
+        <div class="contact-details-field" matTooltip="L'E-mail du patient" [matTooltipPosition]="'above'">
+          <i class="material-icons-two-tone color-icon">email</i>
+          <div class="contact-detail-info"> {{rdv.patient.email}}
+          </div>
+        </div>
+        <div class="contact-details-field" matTooltip="Numéro de téléphone du patient" [matTooltipPosition]="'above'">
+          <i class="material-icons-two-tone color-icon">phonelink_ring</i>
+          <div class="contact-detail-info"> {{rdv.patient.telephone}}
+          </div>
+        </div>
+        <div class="contact-details-field" matTooltip="Patient Address" [matTooltipPosition]="'above'">
+          <i class="material-icons-two-tone color-icon">location_on</i>
+          <div class="contact-detail-info"> {{rdv.patient.adresse}}
+          </div>
+        </div>
+        <div class="contact-details-field" matTooltip="Patient Disease" [matTooltipPosition]="'above'">
+          <i class="material-icons-two-tone color-icon">healing</i>
+          <div class="contact-detail-info"> {{rdv.symptom}}
+          </div>
+        </div>
+      </mat-card-content>
+    </div>
+  </div>
+</div>

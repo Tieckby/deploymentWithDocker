@@ -1,0 +1,60 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Médecins</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/doctor/dashboard">
+                <i class="fas fa-home"></i>Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Médecins</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body" *ngFor="let item of allMedecins">
+            <div class="row">
+              <div class="col-12">
+                <div class="card p-3">
+                  <div class="row">
+                    <div class="col-12 col-md-2 mb-0">
+                      <img class="img-circle doc-card-image" style="width: 150px;" src="{{userProfileImg}}{{item.username}}">
+                    </div>
+                    <div class="col-md-6 border-right mb-0">
+                      <div class="doc-card-title">
+                        <h4>{{item.nom}} {{item.prenom}}</h4>
+                      </div>
+                      <p>
+                        <strong>{{item.specialite.nom}}</strong><br>
+                        <i>{{item.cabinetMedicale.nom}}</i><br>
+                        <i>{{item.cabinetMedicale.rive.nomRive}}, {{item.cabinetMedicale.adresse}}</i>
+                      </p>
+                      <div class="description">
+                        <p>{{item.nom}} {{item.prenom}} est l'un de nos médecins qui ont beaucoup d'expériences avec comme spécialité {{item.specialite.nom}} !<br></p>
+                      </div>
+                    </div>
+                    <div class="d-flex col-md-4 mb-0">
+                      <div class="d-flex flex-column justify-content-start user-profile w-100">
+                        <div><i class="fas fa-map-marker-alt pt-3 psr-3"></i>{{item.adresse}}</div>
+                        <div><i class="fas fa-envelope pt-3 psr-3"></i>{{item.email}}</div>
+                        <div><i class="fas fa-phone pt-3 psr-3"></i>{{item.telephone}}</div>
+                        <div><i class="fas fa-briefcase pt-3 psr-3"></i>{{item.etat}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

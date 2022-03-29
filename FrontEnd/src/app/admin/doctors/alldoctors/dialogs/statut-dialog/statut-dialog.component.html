@@ -1,0 +1,7 @@
+<div class="mb-4">
+    <h5>Statut de {{data.nom}} {{data.prenom}}</h5>
+</div>
+<div class="example-button-row">
+    <button mat-raised-button color="primary" [class.auth-spinner]="loading && data.etat === 'DESACTIVER'" [disabled]="data.etat === 'ACTIVER'" (click)="setStatut('ACTIVER')">ACTIVER</button>
+    <button mat-raised-button color="warn" [class.auth-spinner]="loading && data.etat === 'ACTIVER'" [disabled]="data.etat === 'DESACTIVER'" (click)="setStatut('DESACTIVER')">DESACTIVER</button>
+</div>

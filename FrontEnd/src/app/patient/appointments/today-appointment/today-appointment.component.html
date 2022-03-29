@@ -1,0 +1,62 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Rendez-vous</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/patient/dashboard">
+                <i class="fas fa-home"></i>Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Aujourd'hui</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>Les rendez-vous d'aujourd'hui</h2>
+          </div>
+          <div *ngIf="myTodayRDV?.length === 0" class="text-center ">Vous n'avez pas de rendez-vous aujourd'hui !</div>
+          <div class="body">
+            <ul *ngFor="let item of myTodayRDV" class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
+              <li class="app-list">
+                <div class="set-flex">
+                  <div class="media-title font-16">{{item.medecin.nom}} {{item.medecin.prenom}}</div>
+                  <div class="text-job text-muted mb-0">{{item.medecin.specialite.nom}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title font-16">{{item.rdvDate | date: 'dd/MM/yyyy' }}</div>
+                  <div class="text-job text-muted mb-0">{{item.rdvHeure}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Symptôme</div>
+                  <div class="text-job font-16">{{item.symptom}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Téléphone</div>
+                  <div class="text-job font-16">{{item.medecin.telephone}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Accepter</div>
+                  <div *ngIf="item.isValid===null" class="col-red">En attente</div>
+                  <div *ngIf="item.isValid===false" class="col-red">Non</div>
+                  <div *ngIf="item.isValid===true" class="col-green">Oui</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Adresse</div>
+                  <div class="text-job font-16">{{item.medecin.adresse}}</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

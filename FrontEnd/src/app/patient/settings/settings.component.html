@@ -1,0 +1,133 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Profile</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/patient/dashboard">
+                <i class="fas fa-home"></i>Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Profile</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="m-b-20">
+        <div class="contact-grid">
+          <div class="profile-header" style="background-color: #99B9EC;">
+            <div class="user-name">{{myProfile?.nom}} {{myProfile?.prenom}}</div>
+            <div class="name-center">{{myProfile?.profession}}</div>
+          </div>
+          <img src="{{userProfileImg}}" class="user-img" alt="User profile">
+          <label for="imgProfile" style="margin-left: -18px;"><i class="fas fa-edit" style="font-size: 20px;"></i></label>
+          <input type="file" (change)="getPhoto($event)" id="imgProfile" style="display: none; visibility: none;">
+          <p>Adresse : {{myProfile?.adresse}}</p>
+          <div>
+            <span class="phone">
+              <i class="material-icons">phone</i>{{myProfile?.telephone}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="header">
+        <h2>
+          <strong>Changer votre mot de passe</strong></h2>
+      </div>
+      <div class="body">
+        <div class="example-container">
+          <form #changePassword="ngForm" (ngSubmit)="updatePassword(changePassword)">
+            <div *ngIf="errorMsg1" class="mb-2 col-red">{{errorMsg1}}</div>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Nom d'utilisateur</mat-label>
+              <input matInput name="username" ngModel required>
+              <mat-error *ngIf="!changePassword.valid">Veuilez remplir ce champ !</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Nouveau Password</mat-label>
+              <input matInput type="password" name="newPassword" ngModel required>
+              <mat-error *ngIf="!changePassword.valid">Veuilez remplir ce champ !</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" [class.auth-spinner]="passwordloading" [disabled]="!changePassword.valid">Envoyer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="header">
+        <h2>
+          <strong>Modifier le profile</strong></h2>
+      </div>
+      <div class="body">
+        <form #changeUSer="ngForm" (ngSubmit)="userUpdate(changeUSer)">
+          <div class="row clearfix">
+            <div class="col-lg-4 col-md-12">
+              <div class="form-group">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Nom d'utilisateur</mat-label>
+                  <input matInput [ngModel]="myProfile?.username" name="username" ngModel required>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <div class="form-group">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Prénom</mat-label>
+                  <input matInput [ngModel]="myProfile?.prenom" name="prenom" ngModel required>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <div class="form-group">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Nom</mat-label>
+                  <input matInput [ngModel]="myProfile?.nom" name="nom" ngModel required>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <div class="form-group">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Profession</mat-label>
+                  <input matInput [ngModel]="myProfile?.profession" name="profession" ngModel required>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <div class="form-group">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Adress</mat-label>
+                  <input matInput [ngModel]="myProfile?.adresse" name="adresse" ngModel required>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <div class="form-group">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Email</mat-label>
+                  <input matInput [ngModel]="myProfile?.email" name="email" ngModel required>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <div class="form-group">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Téléphone</mat-label>
+                  <input matInput [ngModel]="myProfile?.telephone" name="telephone" ngModel required>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <button mat-raised-button color="primary" [class.auth-spinner]="loading" [disabled]="!changeUSer.valid">Enregistrer </button>
+            </div>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</section>
